@@ -905,7 +905,7 @@ class Translator:
         for j, trans_input in enumerate(trans_inputs):
             num_tokens = len(trans_input)  # includes eos
             max_output_lengths.append(self._get_max_output_length(num_tokens))
-            source[j, :num_tokens, 0] = data_io.tokens2ids(trans_input.tokens, self.source_vocabs[0])
+            source[j, :num_tokens, 0] = np.array(data_io.tokens2ids(trans_input.tokens, self.source_vocabs[0]))
 
             factors = trans_input.factors if trans_input.factors is not None else []
             num_factors = 1 + len(factors)
