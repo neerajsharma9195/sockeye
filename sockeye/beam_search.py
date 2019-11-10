@@ -553,8 +553,6 @@ class BeamSearch(mx.gluon.Block):
         vocab_slice_ids = None  # type: Optional[mx.nd.NDArray]
         if restrict_lexicon:
             source_words = utils.split(source, num_outputs=self.num_source_factors, axis=2, squeeze_axis=True)[0]
-            # TODO: See note in method about migrating to pure MXNet when set operations are supported.
-            #       We currently convert source to NumPy and target ids back to NDArray.
             vocab_slice_ids = restrict_lexicon.get_trg_ids(source_words)
             if any(raw_constraint_list):
                 # Add the constraint IDs to the list of permissibled IDs, and then project them into the reduced space
