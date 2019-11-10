@@ -99,7 +99,11 @@ def raw_corpus_length_ratio(hypotheses: Iterable[str], references: Iterable[str]
     :param references: Reference stream.
     :return: Length ratio score as float.
     """
-    ratios = [len(h.split())/len(r.split()) for h, r in zip(hypotheses, references)]
+    ratios = []  # type: List[float]
+    for h, r in zip(hypotheses, references):
+        hyp_len = len(h.split())
+        ref_len = len(r.split())
+        ratios.append(hyp_len / ref_len if ref_len else 0.0)
     return sum(ratios)/len(ratios) if len(ratios) else 0.0
 
 
