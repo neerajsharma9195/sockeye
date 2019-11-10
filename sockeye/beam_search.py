@@ -598,7 +598,7 @@ class BeamSearch(mx.gluon.Block):
         # item on the beam for each sentence
         inactive = mx.nd.zeros((batch_size * self.beam_size), dtype='int32', ctx=self.context)
         t = 1
-        for t in range(1, max_iterations + 1):  # TODO: max_iterations + 1 is the MINIMUM to get correct results right now
+        for t in range(1, max_iterations + 1):  # max_iterations + 1 is the minimum # of iterations for correct results
             # (1) obtain next predictions and advance models' state
             # target_dists: (batch_size * beam_size, target_vocab_size)
             target_dists, model_states = self._inference.decode_step(best_word_indices, model_states, vocab_slice_ids)
